@@ -1,7 +1,7 @@
 import { Text } from "dripsy";
 
 type PromptProps = {
-    text: string
+    text?: string | null
 }
 
 const Prompt = (props: PromptProps) => {

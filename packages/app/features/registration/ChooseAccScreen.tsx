@@ -3,10 +3,10 @@ import { StyleSheet } from 'react-native'
 import { View } from 'dripsy'
 import { createParam } from 'solito'
 import { Avatar, Button, Card, Text, TextInput } from 'react-native-paper'
-import Logo from 'app/components/Logo'
+import Logo from 'app/public/Logo'
 import ChooseFbAccount from './fb/ChooseFbAccount'
 import GoogleRegistration from './google/GoogleOption'
-import SetMail from './email/MailCreds'
+import SetMail from './email/MailSignUp'
 
 const ChooseAccScreen = () => {
   return (

@@ -1,3 +1,3 @@
-import { HomeScreen } from 'app/features/home/screen'
+import RegistrationOptionsScreen from 'app/features/registration/RegistrationOptionsScreen'
 
-export default HomeScreen
+export default RegistrationOptionsScreen

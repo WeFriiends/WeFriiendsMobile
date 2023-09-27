@@ -17,9 +17,15 @@ export function NavigationProvider({
             initialRouteName: 'home',
             screens: {
               home: '',
-              registration: 'registration',
+              registration: {
+                path: 'registration/:mail-option',
+              },
+             'glad-screen': {path: 'registration/glad-screen/:id'}
+              ,
+              signIn: 'signIn',
               'user-detail': 'user/:id',
               'user-profile': 'user-profile',
+              NotFound: '*', // https://reactnavigation.org/docs/configuring-links/#notfound-screen
             },
           },
         }),

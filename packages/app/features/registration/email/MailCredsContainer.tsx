@@ -1,20 +1,24 @@
 import { StyleSheet } from 'react-native'
 import { View } from 'dripsy'
-import Logo from 'app/components/Logo'
 import { Text } from 'react-native-paper'
-import MailCreds from './MailCreds'
+import MailSignUp from './MailSignUp'
+import MailSignIn from './MailSignIn'
+import LogoComponent from 'app/components/LogoComponent'
+import { createParam } from 'solito'
 
 const MailCredsContainer = () => {
+  const { useParam } = createParam()
+  const [mailSign] = useParam('mail-option')
+  console.log({ mailSign })
+  const title = mailSign === 'mail-sign-in' ? 'Sign In' : 'Enter e-mail'
   return (
     <View>
-      <View style={styles.logoView}>
-        <Logo />
-      </View>
+      <LogoComponent />
       <View style={styles.registrationContainer}>
         <View style={styles.textBlock}>
-          <Text style={styles.coloredText}>Enter e-mail</Text>
+          <Text style={styles.coloredText}>{title}</Text>
         </View>
-        <MailCreds />
+        {mailSign === 'mail-sign-in' ? <MailSignIn /> : <MailSignUp />}
       </View>
     </View>
   )

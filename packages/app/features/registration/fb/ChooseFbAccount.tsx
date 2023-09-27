@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { StyleSheet } from 'react-native'
 import { View } from 'dripsy'
-import Logo from 'app/components/Logo'
+import Logo from 'app/public/Logo'
 import { Avatar, Button, Card, Text, TextInput } from 'react-native-paper'
 
 const ChooseFbAccount = () => {

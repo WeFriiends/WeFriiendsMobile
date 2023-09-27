@@ -1,56 +1,67 @@
+import GladScreen from '../../features/registration/glad-screen/GladScreen'
 import { HomeScreen } from '../../features/home/screen'
-import RegistrationOptionsScreen from '../../features/registration/RegistrationOptionsScreen'
 import MailCreds from '../../features/registration/email/MailCredsContainer'
-import GladScreen from '../../features/registration/GladScreen'
 import ProfileScreen from 'app/features/user/profile-screen'
+import RegistrationOptionsScreen from '../../features/registration/RegistrationOptionsScreen'
 import { UserDetailScreen } from '../../features/user/detail-screen'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
-const Stack = createNativeStackNavigator<{
+export type RootStackParamList = {
   home: undefined
+  signIn: undefined
+  'mail-sign-up': undefined
+  'mail-sign-in': undefined
+  'glad-screen': {
+    id: string
+  } //undefined
   'user-detail': {
     id: string
   }
-  registration: undefined
-  'mail-sign': {
-    acc: string
-  }
-  'glad-screen': undefined
   'user-profile': {
     id: string
   }
-}>()
+}
+
+const Stack = createNativeStackNavigator<RootStackParamList>()
 
 export function NativeNavigation() {
   return (
     <Stack.Navigator>
       <Stack.Screen
         name="home"
-        component={HomeScreen}
+        component={RegistrationOptionsScreen}
         options={{
           title: 'Home',
         }}
       />
       <Stack.Screen
-        name="registration"
+        name="signIn"
         component={RegistrationOptionsScreen}
         options={{
-          title: 'Registration',
+          title: 'Sign In',
         }}
       />
       <Stack.Screen
-        name="mail-sign"
+        name="mail-sign-up"
         component={MailCreds}
         options={{
-          title: 'MailSign',
+          title: 'Mail Registration',
+        }}
+      />
+      <Stack.Screen
+        name="mail-sign-in"
+        component={MailCreds}
+        options={{
+          title: 'Mail Sign In',
         }}
       />
       <Stack.Screen
         name="glad-screen"
         component={GladScreen}
         options={{
-          title: 'GladScreen',
+          title: 'Glad Screen',
         }}
+       
       />
       <Stack.Screen
         name="user-detail"
