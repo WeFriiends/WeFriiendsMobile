@@ -14,12 +14,9 @@ import ProfileQuestions from 'app/lib/ProfileQuestions.json'
 import { Step } from 'app/types/Step'
 import { StyleSheet } from 'react-native'
 import { View } from 'dripsy'
-import axios from 'axios'
 import { createParam } from 'solito'
 
 type Key = keyof typeof ProfileQuestions;
-
-const { useParam } = createParam<{ id: string }>()
 
 const ProfileScreen = () => {
   const [profile, setProfile] = useState<Profile>()
@@ -34,7 +31,6 @@ const ProfileScreen = () => {
 
   const getProfile = async() => {
     const token = await AsyncStorage.getItem('token');
-    console.log('token is ', token)
     const response = await fetch("https://blushing-pajamas-bear.cyclic.app/api/profile", {
         method: 'GET',
         headers: {
@@ -44,6 +40,7 @@ const ProfileScreen = () => {
         },
     });
     let json = await response.json();
+    console.log(json)
     setProfile(json);
     setIsLoading(false);
   }
@@ -60,6 +57,7 @@ const ProfileScreen = () => {
   }
 
   const getNextQuestion = (action: string) => {
+    console.log('in next question ', action)
     let nextStepId: string | null
     if (action === 'next') {
       nextStepId = currentStep.next
@@ -70,6 +68,7 @@ const ProfileScreen = () => {
     }
     
     if (nextStepId) {
+        console.log('in nextstep')
         const nextStep: Step = ProfileQuestions[nextStepId as Key]
       setCurrentStep(nextStep )
     }
@@ -107,6 +106,7 @@ const ProfileScreen = () => {
           <AddDateOfBirth
             step={currentStep}
             navigateToNextStep={getNextQuestion}
+            dob={profile?.dateOfBirth}
           />
         ) : null}
         {currentStep.key === 'location' ? (
@@ -132,7 +132,6 @@ const ProfileScreen = () => {
         ) : null}
       </View>
       }
-      
     </View>
   )
 }
