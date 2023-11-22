@@ -2,7 +2,6 @@ import {
   Button,
   StyleSheet,
   Text,
-  TextInput,
   TouchableHighlight,
   TouchableOpacity,
 } from 'react-native'
@@ -13,6 +12,7 @@ import Data from '../Data'
 import { Profile } from 'app/types/Profile'
 import Prompt from '../Prompt'
 import { Step } from 'app/types/Step'
+import { TextInput } from 'react-native-paper';
 import { View } from 'dripsy'
 import axios from 'axios'
 
@@ -24,12 +24,14 @@ type AddNameProps = {
 
 const AddName = (props: AddNameProps) => {
   const [name, setName] = useState<string | undefined>(props.name);
+  const [initialName, setInitialName] = useState<string | undefined>(props.name);
   const [errorMessage, setErrorMessage] = useState<string>('');
   const [isInputValidated, setIsInputValidated] = useState<boolean>(false);
-  const [token, setToken] = useState<string>('');
+  const [token, setToken] = useState<any>();
 
   useEffect(() => {
-    getToken()
+    getToken();
+   
   })
 
   const getToken = async () => {
@@ -49,24 +51,28 @@ const AddName = (props: AddNameProps) => {
   }
 
   const handlePress = async (action: string) => {
-    if (!props.name) {
-      const response = await axios.post(
-        'https://blushing-pajamas-bear.cyclic.app/profile/name',
-        {
-          name,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-          },
+    console.log(initialName=== name)
+    if (initialName !== name) {
+        console.log('here')
+        try {
+            await axios.post(
+                'https://blushing-pajamas-bear.cyclic.app/api/profile/name',
+                {
+                  name,
+                },
+                {
+                  headers: {
+                    Authorization: `Bearer ${token}`,
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json',
+                  },
+                }
+              )
+        } catch (e) {
+            console.log(e)
         }
-      )
-    }  else if (props.name !== name) {
-        // edit name
-      } else
-    setName('')
+    } 
+    
     props.navigateToNextStep(action)
   }
 
@@ -81,8 +87,9 @@ const AddName = (props: AddNameProps) => {
         value={name || ''}
         autoCapitalize="none"
         autoCorrect={false}
+        mode='outlined'
         style={styles.input}
-        
+        label='Name'
         onChangeText={(newValue) => {
           if (newValue.length > 0) {
             setIsInputValidated(true)
@@ -147,3 +154,4 @@ const styles = StyleSheet.create({
 })
 
 export default AddName
+

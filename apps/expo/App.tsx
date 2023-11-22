@@ -1,6 +1,7 @@
+import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper'
+
 import { NativeNavigation } from 'app/navigation/native'
 import { Provider } from 'app/provider'
-import { Provider as PaperProvider, DefaultTheme } from 'react-native-paper'
 import { UserProvider } from 'app/context/login/UserContext'
 
 const theme = {
@@ -12,12 +13,14 @@ const theme = {
 
 export default function App() {
   return (
-    <UserProvider>
-      <Provider>
-        <PaperProvider theme={theme}>
-          <NativeNavigation />
-        </PaperProvider>
-      </Provider>
-    </UserProvider>
+    <Provider>
+      {/* <UserProvider> */}
+
+      <PaperProvider theme={theme}>
+        <NativeNavigation />
+      </PaperProvider>
+
+      {/* </UserProvider> */}
+    </Provider>
   )
 }

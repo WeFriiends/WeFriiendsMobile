@@ -12,7 +12,7 @@ export const mailSignIn = async (email: string, password: string) => {
 }
 
 export const isAuthenticated = () => {
-  const user = localStorage.getItem('user')
+  const user = null // localStorage.getItem('user')
   if (!user) {
     return {}
   }

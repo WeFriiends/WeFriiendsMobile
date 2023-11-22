@@ -10,6 +10,7 @@ export type RootStackParamList = {
   home: undefined
   signIn: undefined
   'mail-sign-up': undefined
+  registration: undefined
   'mail-sign-in': undefined
   'glad-screen': {
     id: string
@@ -29,7 +30,7 @@ export function NativeNavigation() {
     <Stack.Navigator>
       <Stack.Screen
         name="home"
-        component={RegistrationOptionsScreen}
+        component={HomeScreen}  //it was RegistrationOptionsScreen, porb needs to be home
         options={{
           title: 'Home',
         }}
@@ -42,7 +43,7 @@ export function NativeNavigation() {
         }}
       />
       <Stack.Screen
-        name="mail-sign-up"
+        name="mail-sign-up" //mail-sign-up
         component={MailCreds}
         options={{
           title: 'Mail Registration',
